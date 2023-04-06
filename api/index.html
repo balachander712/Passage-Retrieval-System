@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Text Retrieval Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1 class="mb-4">Text Retrieval Page</h1>
+      <div class="form-group">
+        <label for="query">Enter a query below:</label>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="query">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" onclick="retrieveText()">Retrieve</button>
+          </div>
+        </div>
+      </div>
+      <div class="card mb-4">
+        <div class="card-header">Result</div>
+        <div class="card-body">
+          <div id="result"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function retrieveText() {
+        const query = document.getElementById("query").value;
+        const url = `http://localhost:8000/data?query=${query}`;
+        fetch(url)
+          .then(response => response.text())
+          .then(text => {
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = text;
+          });
+      }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  </body>
+</html>
